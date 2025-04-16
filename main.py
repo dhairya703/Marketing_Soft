@@ -13,6 +13,7 @@ class WhatsAppMessengerApp:
         self.root.title("WhatsApp Bulk Messenger")
         self.root.geometry("1100x600")
 
+
         self.numbers = []
         self.raw_message = ""
         
@@ -53,14 +54,20 @@ class WhatsAppMessengerApp:
 
         self.message_input = MessageInput(self)
         self.message_input.pack(in_=left_frame, anchor="w")
-        # Control buttons frame
+        # # Control buttons frame
+        # control_frame = tk.Frame(left_frame)
+        # control_frame.pack(pady=10)
+        # tk.Button(left_frame, text="Start Sending", bg="#25D366", fg="white", activebackground="#1DA851",
+        #           relief="flat", font=("Arial", 12, "bold"), command=self.start_sending).pack(pady=10, ipadx=10, ipady=10)
+   # Control buttons frame
         control_frame = tk.Frame(left_frame)
         control_frame.pack(pady=10)
         tk.Button(left_frame, text="Start Sending", bg="#25D366", fg="white", activebackground="#1DA851",
                   relief="flat", font=("Arial", 12, "bold"), command=self.start_sending).pack(pady=10, ipadx=10, ipady=10)
-        # tk.Button(control_frame, text="⏸️ Pause", command=self.sender.pause_sending).pack(side=tk.LEFT, padx=5)
-        # tk.Button(control_frame, text="▶️ Resume", command=self.sender.resume_sending).pack(side=tk.LEFT, padx=5)
-        # tk.Button(control_frame, text="⏹️ Stop", command=self.sender.stop_sending).pack(side=tk.LEFT, padx=5)
+        tk.Button(control_frame, text="⏸️ Pause", command=self.pause_sending).pack(side=tk.LEFT, padx=5)
+        tk.Button(control_frame, text="▶️ Resume", command=self.resume_sending).pack(side=tk.LEFT, padx=5)
+        tk.Button(control_frame, text="⏹️ Stop", command=self.stop_sending).pack(side=tk.LEFT, padx=5)
+
 
         # Progress bar
         self.progress_var = tk.DoubleVar()
@@ -90,8 +97,6 @@ class WhatsAppMessengerApp:
         tk.Label(right_frame, text="📜 Message to Send:").pack(anchor="w", pady=(10, 5))
         self.message_display = scrolledtext.ScrolledText(right_frame, width=30, height=10, font=("Courier", 10))
         self.message_display.pack(fill=tk.BOTH, expand=True)
-
-
 
     def log(self, message):
         self.log_area.insert(tk.END, message + "\n")
@@ -123,9 +128,22 @@ class WhatsAppMessengerApp:
         if not message:
             self.log("⚠️ No message to send.")
             return
+        # Save sender instance for pause/resume to work
+        self.sender = WhatsAppSender(self)
+        self.sender.send_messages(self.numbers, message)
+        # sender = WhatsAppSender(self)
+        # sender.send_messages(self.numbers, message)
+    def pause_sending(self):
+        if hasattr(self, 'sender'):
+            self.sender.pause_sending()
 
-        sender = WhatsAppSender(self)
-        sender.send_messages(self.numbers, message)
+    def resume_sending(self):
+        if hasattr(self, 'sender'):
+            self.sender.resume_sending()
+
+    def stop_sending(self):
+        if hasattr(self, 'sender'):
+            self.sender.stop_sending()
     
 
     def create_group(self):
