@@ -6,16 +6,20 @@ from modules.message_input import MessageInput
 from modules.ocr_extractor import OCRExtractor
 from modules.sender import WhatsAppSender
 from tkinter import ttk
+from modules.lifetime_tracker import load_lifetime_count, save_lifetime_count
+from tkinter import filedialog
+
+
 
 class WhatsAppMessengerApp:
     def __init__(self, root):
         self.root = root
         self.root.title("WhatsApp Bulk Messenger")
         self.root.geometry("1100x600")
-
-
         self.numbers = []
         self.raw_message = ""
+        self.selected_image_path = None
+
         
 
         # Main horizontal layout
@@ -35,6 +39,8 @@ class WhatsAppMessengerApp:
                   relief="flat", command=self.create_group).pack(pady=10, fill=tk.X, padx=10)
         tk.Button(sidebar, text="Save Contacts", bg="#128C7E", fg="white",
                   relief="flat", command=self.save_contacts).pack(pady=10, fill=tk.X, padx=10)
+        tk.Button(sidebar, text="How to Use", bg="#128C7E", fg="white",
+                  relief="flat", command=self.save_contacts).pack(pady=10, fill=tk.X, padx=10)
 
         # Version at bottom
         tk.Label(sidebar, text="v1.0.0", bg="#075E54", fg="white", font=("Arial", 10)).pack(side=tk.BOTTOM, pady=10)
@@ -48,34 +54,55 @@ class WhatsAppMessengerApp:
         # Top-left: number and message input
         left_frame = tk.Frame(content_frame)
         left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.lifetime_sent = load_lifetime_count()
+        self.lifetime_label = tk.Label(left_frame, text=f"📨 Lifetime Messages Sent: {self.lifetime_sent}", font=("Arial", 10, "bold"))
+        self.lifetime_label.pack(anchor="ne", pady=(5, 0))
 
         self.number_input = NumberInput(self)
         self.number_input.pack(in_=left_frame, anchor="w")
 
         self.message_input = MessageInput(self)
         self.message_input.pack(in_=left_frame, anchor="w")
+        tk.Label(left_frame, text="Attach Image:", font=("Arial", 16)).pack(anchor="w", padx=20, pady=(10, 0))
+
+        tk.Button(left_frame, text="📷 Select Image",  bg="#075E54", fg="white", activebackground="#1DA851",
+                relief="flat", font=("Arial", 12, ),command=self.select_image).pack(anchor="w",padx=20)
+
         # # Control buttons frame
         # control_frame = tk.Frame(left_frame)
         # control_frame.pack(pady=10)
         # tk.Button(left_frame, text="Start Sending", bg="#25D366", fg="white", activebackground="#1DA851",
         #           relief="flat", font=("Arial", 12, "bold"), command=self.start_sending).pack(pady=10, ipadx=10, ipady=10)
    # Control buttons frame
+        # control_frame = tk.Frame(left_frame)
+        # control_frame.pack(pady=10)
+
+        # tk.Button(left_frame, text="Start Sending", bg="#25D366", fg="white", activebackground="#1DA851",
+        #           relief="flat", font=("Arial", 12, "bold"), command=self.start_sending).pack(pady=10, ipadx=10, ipady=10)
+        # tk.Button(control_frame, text="⏸️ Pause", command=self.pause_sending).pack(side=tk.LEFT, padx=5)
+        # tk.Button(control_frame, text="▶️ Resume", command=self.resume_sending).pack(side=tk.LEFT, padx=5)
+        # tk.Button(control_frame, text="⏹️ Stop", command=self.stop_sending).pack(side=tk.LEFT, padx=5)
         control_frame = tk.Frame(left_frame)
         control_frame.pack(pady=10)
-        tk.Button(left_frame, text="Start Sending", bg="#25D366", fg="white", activebackground="#1DA851",
-                  relief="flat", font=("Arial", 12, "bold"), command=self.start_sending).pack(pady=10, ipadx=10, ipady=10)
+
+        tk.Button(control_frame, text="Start Sending", bg="#25D366", fg="white", activebackground="#1DA851",
+                relief="flat", font=("Arial", 12, "bold"), command=self.start_sending).pack(side=tk.LEFT, padx=5, ipadx=10, ipady=10)
+
         tk.Button(control_frame, text="⏸️ Pause", command=self.pause_sending).pack(side=tk.LEFT, padx=5)
         tk.Button(control_frame, text="▶️ Resume", command=self.resume_sending).pack(side=tk.LEFT, padx=5)
         tk.Button(control_frame, text="⏹️ Stop", command=self.stop_sending).pack(side=tk.LEFT, padx=5)
 
 
+
         # Progress bar
+
         self.progress_var = tk.DoubleVar()
         self.progress_bar = tk.ttk.Progressbar(left_frame, variable=self.progress_var, maximum=100)
-        self.progress_bar.pack(fill=tk.X, pady=(5, 10))
+        self.progress_bar.pack(fill=tk.X, pady=(5, 10),padx=10)
+        
 
         self.log_area = scrolledtext.ScrolledText(left_frame, width=90, height=10)
-        self.log_area.pack(pady=5)
+        self.log_area.pack(fill=(tk.X),pady=10,padx=10)
 
 
 
@@ -109,6 +136,14 @@ class WhatsAppMessengerApp:
     def update_message_display(self, message):
         self.message_display.delete("1.0", tk.END)
         self.message_display.insert(tk.END, message)
+    def select_image(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Images", "*.png;*.jpg;*.jpeg;*.gif")])
+        if file_path:
+            self.selected_image_path = file_path
+            self.log(f"🖼️ Selected image: {file_path}")
+        else:
+            self.selected_image_path = None
+            self.log("❌ No image selected.")
 
 
     def extract_numbers_from_images(self):
@@ -130,7 +165,7 @@ class WhatsAppMessengerApp:
             return
         # Save sender instance for pause/resume to work
         self.sender = WhatsAppSender(self)
-        self.sender.send_messages(self.numbers, message)
+        self.sender.send_messages(self.numbers, message, self.selected_image_path)
         # sender = WhatsAppSender(self)
         # sender.send_messages(self.numbers, message)
     def pause_sending(self):

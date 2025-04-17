@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog, scrolledtext
+import csv
+
+
 
 class NumberInput(tk.Frame):
     def __init__(self, parent):
@@ -33,6 +36,10 @@ class NumberInput(tk.Frame):
         tk.Button(btn_frame, text="🖼️ Extract from Images", bg="#075E54", fg="white",
                   activebackground="#1DA851", relief="flat",
                   command=self.extract_numbers_from_images).pack(side=tk.LEFT, padx=5,ipadx=8,ipady=8)
+        tk.Button(btn_frame, text="📄 Load CSV", bg="#075E54", fg="white",
+          activebackground="#1DA851", relief="flat",
+          command=self.load_csv_file).pack(side=tk.LEFT, padx=5, ipadx=8, ipady=8)
+
 
 
         # In WhatsAppMessengerApp
@@ -53,8 +60,28 @@ class NumberInput(tk.Frame):
                     if cleaned:
                         self.numbers.append(cleaned)
             self.parent.numbers = self.numbers
-            self.update_number_display()
+            self.parent.update_number_display()
             self.parent.log(f"✅ Loaded {len(self.numbers)} numbers from file.")
+    def load_csv_file(self):
+        path = filedialog.askopenfilename(filetypes=[("CSV Files", "*.csv")])
+        if not path:
+            return
+
+        self.numbers_path.set(path)
+        self.numbers.clear()
+        self.parent.numbers = []  # will hold dicts like {"number": ..., "name": ..., "product": ...}
+
+        with open(path, newline='', encoding="utf-8") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                number = row.get("number", "").strip().replace(" ", "").replace("+", "")
+                if number:
+                    row["number"] = number  # clean the number
+                    self.parent.numbers.append(row)
+                    self.numbers.append(number)
+
+        self.parent.update_number_display()
+        self.parent.log(f"✅ Loaded {len(self.numbers)} numbers from CSV with personalization data.")
 
     def manual_number_input(self):
         win = tk.Toplevel(self.parent.root)

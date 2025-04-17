@@ -29,6 +29,8 @@ class MessageInput(tk.Frame):
                   activebackground="#1DA851", relief="flat",
                   command=self.manual_message_input).pack(side=tk.LEFT, padx=5, ipadx=8, ipady=8)
 
+        
+
     def load_message_file(self):
         path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
         if path:
