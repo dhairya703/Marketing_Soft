@@ -1,19 +1,8 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from urllib.parse import quote
-from datetime import datetime
-import pyautogui
 import threading
 import time
 import random
 import threading
-import time
-import random
-from urllib.parse import quote
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -27,6 +16,7 @@ from PIL import Image
 import io
 from string import Template
 from modules.lifetime_tracker import load_lifetime_count, save_lifetime_count
+import os
 
 import pyautogui
 # ⬇️ Add this outside any class
@@ -96,7 +86,15 @@ class WhatsAppSender:
             options.add_argument("--user-data-dir=D:/ChromeUserData")
             options.add_argument("--profile-directory=Default")
             options.add_experimental_option("excludeSwitches", ["enable-logging"])
-            service = Service("D:/mission/whatsapp-bulk-messenger/chromedriver-win64/chromedriver.exe")
+            # service = Service("D:/mission/whatsapp-bulk-messenger/chromedriver-win64/chromedriver.exe")
+            # driver = webdriver.Chrome(service=service, options=options)
+            # wait = WebDriverWait(driver, 20)
+                    # Dynamically construct the path to chromedriver.exe
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            driver_path = os.path.join(base_dir, 'driver', 'chromedriver.exe')
+            service = Service(driver_path)
+
+            # Initialize the WebDriver
             driver = webdriver.Chrome(service=service, options=options)
             wait = WebDriverWait(driver, 20)
 
