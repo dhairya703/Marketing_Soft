@@ -24,9 +24,6 @@
 - **Message History**  
   Logs all previously sent messages locally for future reference and analysis.
 
-- **Google Analytics (GA4) Integration**  
-  Tracks key usage events such as application start and messages sent, for monitoring and improving user engagement.
-
 - **Sidebar Navigation Interface**  
   Includes placeholders for:
   - Application logo
@@ -35,6 +32,13 @@
   - Version information display
 
 ---
+<img width="1918" height="1021" alt="image" src="https://github.com/user-attachments/assets/5d37c86a-b6d5-442b-96e8-adc0e5d96a41" />
+<img width="1918" height="1021" alt="image" src="https://github.com/user-attachments/assets/678ff162-32d0-4b6e-9edc-9620c6bd41f1" />
+<img width="1225" height="512" alt="image" src="https://github.com/user-attachments/assets/218ec151-01e7-4649-87b8-0f52400e4f75" />
+<img width="722" height="350" alt="image" src="https://github.com/user-attachments/assets/a979637f-ffca-4966-86d9-02ca0c3fa7f5" />
+
+
+
 
 ## Installation
 
