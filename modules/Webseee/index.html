@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenFresh Veggies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #fdfdfd; }
+        .hero-bg { 
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://www.propertyfinder.ae/blog/wp-content/uploads/2025/01/3-14.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .product-card img { transition: transform 0.4s ease; }
+        .product-card:hover img { transform: scale(1.08); }
+        .btn-primary { @apply bg-indigo-600 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 ease-in-out; }
+        .btn-primary:hover { @apply bg-indigo-700 shadow-lg transform -translate-y-1; }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900">
+                <i class="fas fa-gem mr-2 text-indigo-600"></i>GreenFresh Veggies
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-gray-600 hover:text-indigo-600 transition font-medium">Home</a>
+                <a href="#products" class="text-gray-600 hover:text-indigo-600 transition font-medium">Products</a>
+                <a href="#about" class="text-gray-600 hover:text-indigo-600 transition font-medium">About</a>
+                <a href="#contact" class="text-gray-600 hover:text-indigo-600 transition font-medium">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white min-h-[70vh] flex items-center justify-center">
+        <div class="text-center bg-black bg-opacity-30 p-12 rounded-lg">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Discover Your Signature Style</h1>
+            <p class="text-lg md:text-xl mb-8">At GreenFresh, we provide the freshest vegetables directly from local farms to your table. Healthy, organic, and always fresh!</p>
+            <a href="#products" class="btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-24 bg-[#f7f7f7]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800">Featured Products</h2>
+            </div>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                
+        <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <img src="https://www.oneindia.com/vegetables-price/vegatableimages/Potato.jpg" alt="Potato" class="w-full h-64 object-cover">
+            <div class="p-5 text-center flex-grow flex flex-col">
+                <h3 class="text-lg font-semibold text-gray-800">Potato</h3>
+                <p class="text-indigo-600 font-bold mt-2">Rs 32.00</p>
+            </div>
+        </div>
+        
+        <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <img src="https://www.bbassets.com/media/uploads/p/l/40084039_2-fresho-onion-horeca.jpg" alt="Onion" class="w-full h-64 object-cover">
+            <div class="p-5 text-center flex-grow flex flex-col">
+                <h3 class="text-lg font-semibold text-gray-800">Onion</h3>
+                <p class="text-indigo-600 font-bold mt-2">Rs 30.00</p>
+            </div>
+        </div>
+        
+        <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <img src="https://img.etimg.com/thumb/width-1200,height-900,imgsize-194822,resizemode-75,msid-65605440/industry/cons-products/food/prices-of-tomatoes-plunges-to-rs-2-per-kg.jpg" alt="Tomato" class="w-full h-64 object-cover">
+            <div class="p-5 text-center flex-grow flex flex-col">
+                <h3 class="text-lg font-semibold text-gray-800">Tomato</h3>
+                <p class="text-indigo-600 font-bold mt-2">Rs 25.00</p>
+            </div>
+        </div>
+        
+        <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <img src="https://5.imimg.com/data5/YW/FU/MY-46595757/fresh-cauliflower-28gobhi-29-281kg-29.png" alt="Cauliflower" class="w-full h-64 object-cover">
+            <div class="p-5 text-center flex-grow flex flex-col">
+                <h3 class="text-lg font-semibold text-gray-800">Cauliflower</h3>
+                <p class="text-indigo-600 font-bold mt-2">Rs 120.00</p>
+            </div>
+        </div>
+        
+        <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <img src="https://www.bbassets.com/media/uploads/p/l/10000162_18-fresho-pumpkin-green.jpg" alt="Pumpkin" class="w-full h-64 object-cover">
+            <div class="p-5 text-center flex-grow flex flex-col">
+                <h3 class="text-lg font-semibold text-gray-800">Pumpkin</h3>
+                <p class="text-indigo-600 font-bold mt-2">Rs 53.00</p>
+            </div>
+        </div>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+            <div class="md:w-1/2">
+                <img src="https://www.shutterstock.com/image-photo/fruit-shop-indian-male-street-260nw-2334340005.jpg" alt="About Us" class="rounded-lg shadow-xl">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-4xl font-bold text-gray-800 mb-6">About GreenFresh Veggies</h2>
+                <p class="text-gray-600 leading-relaxed mb-4">At GreenFresh, we provide the freshest vegetables directly from local farms to your table. Healthy, organic, and always fresh!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-[#f7f7f7]">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-6">Get In Touch</h2>
+            <p class="text-gray-500 mb-6">Email: contact@greenfreshveggies.com,911231231231</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 text-center">
+        <p class="text-gray-500">&copy; 2024 GreenFresh Veggies. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

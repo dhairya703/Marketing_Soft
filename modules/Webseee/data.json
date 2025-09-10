@@ -1,0 +1,34 @@
+{
+    "shop_name": "GreenFresh Veggies",
+    "about_text": "At GreenFresh, we provide the freshest vegetables directly from local farms to your table. Healthy, organic, and always fresh!",
+    "contact_email": "contact@greenfreshveggies.com,911231231231",
+    "products": [
+        {
+            "name": "Potato",
+            "price": "32.00",
+            "image": "https://www.oneindia.com/vegetables-price/vegatableimages/Potato.jpg"
+        },
+        {
+            "name": "Onion",
+            "price": "30.00",
+            "image": "https://www.bbassets.com/media/uploads/p/l/40084039_2-fresho-onion-horeca.jpg"
+        },
+        {
+            "name": "Tomato",
+            "price": "25.00",
+            "image": "https://img.etimg.com/thumb/width-1200,height-900,imgsize-194822,resizemode-75,msid-65605440/industry/cons-products/food/prices-of-tomatoes-plunges-to-rs-2-per-kg.jpg"
+        },
+        {
+            "name": "Cauliflower",
+            "price": "120.00",
+            "image": "https://5.imimg.com/data5/YW/FU/MY-46595757/fresh-cauliflower-28gobhi-29-281kg-29.png"
+        },
+        {
+            "name": "Pumpkin",
+            "price": "53.00",
+            "image": "https://www.bbassets.com/media/uploads/p/l/10000162_18-fresho-pumpkin-green.jpg"
+        }
+    ],
+    "hero_image": "https://www.propertyfinder.ae/blog/wp-content/uploads/2025/01/3-14.jpg",
+    "about_image": "https://www.shutterstock.com/image-photo/fruit-shop-indian-male-street-260nw-2334340005.jpg"
+}

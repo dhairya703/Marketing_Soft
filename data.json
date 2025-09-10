@@ -1,0 +1,17 @@
+{
+    "shop_name": "Chic & Unique",
+    "about_text": "Welcome to our store! Discover unique, high-quality products curated just for you.",
+    "contact_email": "info@chicshop.com",
+    "products": [
+        {
+            "name": "Sample Product 1",
+            "price": "29.99",
+            "image": "https://placehold.co/200x200"
+        },
+        {
+            "name": "Sample Product 2",
+            "price": "49.99",
+            "image": "https://placehold.co/200x200"
+        }
+    ]
+}
